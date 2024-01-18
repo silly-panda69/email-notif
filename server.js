@@ -5,10 +5,7 @@ const cors=require('cors');
 
 const app=express();
 app.use(express.json());
-const corsOptions={
-    origin: process.env.HOST,
-    optionSuccessStatus: 200,
-};
+app.use(cors());
 
 const sendMail=async(peer_name,peer_email,peer_subject,peer_msg)=>{
     try{
@@ -38,7 +35,7 @@ const sendMail=async(peer_name,peer_email,peer_subject,peer_msg)=>{
     }
 }
 
-app.post('/',cors(corsOptions),async(req,res)=>{
+app.post('/',async(req,res)=>{
     console.log('red');
     if(req.body.name && req.body.mail){
         const response=await sendMail(req.body.name,req.body.mail,req.body.subject,req.body.msg);
