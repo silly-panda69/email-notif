@@ -4,10 +4,18 @@ const nodemailer=require('nodemailer');
 const cors=require('cors');
 
 const app=express();
+const corsOptions = {
+  origin: (origin, callback) => {
+    const allowedOrigins = [process.env.HOST];
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Request from unauthorized origin"));
+    }
+  },
+};
 app.use(express.json());
-app.use(cors(
-    {origin: [process.env.HOST]}
-));
+app.use(cors(corsOptions));
 
 const sendMail=async(peer_name,peer_email,peer_subject,peer_msg)=>{
     try{
