@@ -41,7 +41,7 @@ const sendMail=async(peer_name,peer_email,peer_subject,peer_msg)=>{
 
 app.post('/',async(req,res)=>{
     console.log('Request Status:');
-    console.log('req.headers.origin');
+    console.log(req.headers.origin);
     if(req.body.name && req.body.mail){
         const response=await sendMail(req.body.name,req.body.mail,req.body.subject,req.body.msg);
         res.send({msg: response});
