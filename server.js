@@ -30,20 +30,23 @@ const sendMail=async(peer_name,peer_email,peer_subject,peer_msg)=>{
             `
         }
         await transporter.sendMail(mailOptions);
+        console.log("Email sent successfully!");
         return "Email sent successfully";
     }catch(err){
         console.log(err);
+         console.log("Error sending email !");
         return "Error sending email !";
     }
 }
 
 app.post('/',async(req,res)=>{
-    console.log('red');
+    console.log('Request Status:');
     if(req.body.name && req.body.mail){
         const response=await sendMail(req.body.name,req.body.mail,req.body.subject,req.body.msg);
         res.send({msg: response});
     }
     else{
+        console.log("Fields Empty");
         res.send({msg: "Fields Empty!"});
     }
 });
