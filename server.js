@@ -8,6 +8,8 @@ const corsOptions = {
   origin: (origin, callback) => {
     const allowedOrigins = process.env.HOST;
     console.log(origin);
+    console.log(allowedOrigins);
+    console.log(allowedOrigins===origin);
     if (allowedOrigins===origin) {
       callback(null, true);
     } else {
