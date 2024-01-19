@@ -6,8 +6,9 @@ const cors=require('cors');
 const app=express();
 const corsOptions = {
   origin: (origin, callback) => {
-    const allowedOrigins = [process.env.HOST];
-    if (allowedOrigins.indexOf(origin) !== -1) {
+    const allowedOrigins = process.env.HOST;
+    console.log(origin);
+    if (allowedOrigins===origin) {
       callback(null, true);
     } else {
       callback(new Error("Request from unauthorized origin"));
