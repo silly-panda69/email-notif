@@ -5,7 +5,9 @@ const cors=require('cors');
 
 const app=express();
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+    {origin: [process.env.HOST]}
+));
 
 const sendMail=async(peer_name,peer_email,peer_subject,peer_msg)=>{
     try{
