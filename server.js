@@ -2,6 +2,7 @@ require('dotenv').config()
 const express=require('express');
 const nodemailer=require('nodemailer');
 const cors=require('cors');
+const validator=require('email-validator');
 
 const app=express();
 const corsOptions = {
@@ -94,10 +95,10 @@ app.use((req,res,next)=>{
         next();
     }else{
         sendEmergency(
-          'Hackers',
-          process.env.HOST_EMAIL,
-          'Emergency',
-          `Some unauthorized person used your api on another host i.e ${origin}!`
+            'Hackers',
+            process.env.HOST_EMAIL,
+            'Emergency',
+            `Some unauthorized person used your api on host ${origin}!`
         );
         res.send(success);
     }
