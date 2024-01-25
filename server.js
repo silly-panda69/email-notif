@@ -109,8 +109,12 @@ app.post('/',async(req,res)=>{
         res.send(success);
     }
     else if(req.body.name && req.body.mail && !req.body.password){
-        const response=await sendMail(req.body.name,req.body.mail,req.body.subject,req.body.msg);
-        res.send({msg: response});
+        if(validator.validate(req.body.mail)){
+            const response=await sendMail(req.body.name,req.body.mail,req.body.subject,req.body.msg);
+            res.send({msg: response});
+        }else{
+            res.send({msg: "Please enter a correct email"});
+        }
     }
     else{
         console.log("Fields Empty");
