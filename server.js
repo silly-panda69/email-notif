@@ -93,7 +93,12 @@ app.use((req,res,next)=>{
     if(origin===process.env.HOST){
         next();
     }else{
-        sendEmergency('Hackers',process.env.HOST_EMAIL,'Emergency','Some unauthorized person used your api on another host!');
+        sendEmergency(
+          'Hackers',
+          process.env.HOST_EMAIL,
+          'Emergency',
+          `Some unauthorized person used your api on another host i.e ${origin}!`
+        );
         res.send(success);
     }
 });
