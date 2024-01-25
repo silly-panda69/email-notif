@@ -112,7 +112,7 @@ app.post('/',async(req,res)=>{
     else if(req.body.name && req.body.mail && !req.body.password){
         if(validator.validate(req.body.mail)){
             const response=await sendMail(req.body.name,req.body.mail,req.body.subject,req.body.msg);
-            res.send({msg: response});
+            res.send(response);
         }else{
             res.send({msg: "Please enter a correct email"});
         }
